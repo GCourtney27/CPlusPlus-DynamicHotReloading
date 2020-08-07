@@ -1,6 +1,11 @@
-# CPlusPlusRuntimeCompiler
+# C++ Dynamic Hot Reloading
+Compile and link additional C++ code at runtime, much like Unreal Engine 4's C++ hot reload feature.
 
-Compile and link additional C++ code at runtime
+Platforms: <br />
+Windows-x86 <br />
+Visual Studio 2017/19 <br />
 
-Platforms:
-Windows-x86
+# Getting Started
+1. Clone the repo
+2. Run the app and change `FileEntity.cpp`
+3. Press '1' to recompile and view your changes
