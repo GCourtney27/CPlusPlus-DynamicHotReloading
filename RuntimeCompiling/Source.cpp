@@ -29,9 +29,9 @@ ScriptableEntity Factory;
 
 int main()
 {
-	/*string path = "Scripts/";
-	for (const auto & entry : fs::directory_iterator(path))
-		cout << entry.path() << endl;
+	string path = "Scripts/";
+	//for (const auto & entry : fs::directory_iterator(path))
+	//	cout << entry.path() << endl;
 
 	auto currentTime = std::chrono::steady_clock::now();
 
@@ -55,7 +55,7 @@ int main()
 			break;
 		}
 
-	}*/
+	}
 
 	const char* key = "P";
 	const unsigned char newKey = (const unsigned char)key;

@@ -9,12 +9,12 @@ FileEntity::FileEntity()
 
 void FileEntity::Start()
 {
-	std::cout << "Started!" << std::endl;
+	std::cout << "Hello from Start Method" << std::endl;
 }
 
 void FileEntity::Update()
 {
-	std::cout << "Updating!" << std::endl;
+	std::cout << "Hello from Update method!" << std::endl;
 	GetTransform()->SetX(300);
 }
 
