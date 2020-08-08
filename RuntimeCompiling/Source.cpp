@@ -29,7 +29,7 @@ ScriptableEntity Factory;
 
 int main()
 {
-	string path = "Scripts/";
+	//string path = "Scripts/";
 	//for (const auto & entry : fs::directory_iterator(path))
 	//	cout << entry.path() << endl;
 
