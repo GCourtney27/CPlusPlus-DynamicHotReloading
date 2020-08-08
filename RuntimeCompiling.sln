@@ -1,25 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RuntimeCompiling", "RuntimeCompiling\RuntimeCompiling.vcxproj", "{00F264AB-FF3E-4B5F-B7B7-22DC96E5AC01}"
+# Visual Studio 16
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RuntimeCompiling", "RuntimeCompiling\RuntimeCompiling.vcxproj", "{EB2F29E8-D728-483A-005B-2DBFECB22746}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00F264AB-FF3E-4B5F-B7B7-22DC96E5AC01}.Debug|x86.ActiveCfg = Debug|Win32
-		{00F264AB-FF3E-4B5F-B7B7-22DC96E5AC01}.Debug|x86.Build.0 = Debug|Win32
-		{00F264AB-FF3E-4B5F-B7B7-22DC96E5AC01}.Release|x86.ActiveCfg = Release|Win32
-		{00F264AB-FF3E-4B5F-B7B7-22DC96E5AC01}.Release|x86.Build.0 = Release|Win32
+		{EB2F29E8-D728-483A-005B-2DBFECB22746}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EB2F29E8-D728-483A-005B-2DBFECB22746}.Debug|Win32.Build.0 = Debug|Win32
+		{EB2F29E8-D728-483A-005B-2DBFECB22746}.Release|Win32.ActiveCfg = Release|Win32
+		{EB2F29E8-D728-483A-005B-2DBFECB22746}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B2D9425F-020E-489B-89EE-3771D34E55F7}
 	EndGlobalSection
 EndGlobal
