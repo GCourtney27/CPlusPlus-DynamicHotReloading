@@ -15,6 +15,7 @@ namespace Framework {
 		static ScriptEngine& Get() { return *s_Instance; }
 
 		void LoadCPPFromFile(const char* Filename);
+		void Recompile();
 		void RunScripts();
 		void CloseApp() { m_Running = false; }
 		void Cleanup();
@@ -25,6 +26,7 @@ namespace Framework {
 		void GetLastDlfcnError();
 	private:
 		bool m_Running = true;
+		bool m_Recompiling = false;
 		
 		std::vector<CPPScript*> m_Scripts;
 		const char* m_ScriptDirectory = "Scripts/";

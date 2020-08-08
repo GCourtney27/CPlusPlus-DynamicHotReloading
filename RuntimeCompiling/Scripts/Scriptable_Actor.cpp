@@ -20,12 +20,13 @@ void ScriptableActor::OnStart()
 
 void ScriptableActor::OnUpdate(float DeltaMs)
 {
-	printf("Updating method from ScriptableActor\n");
+	//printf("Updating method from ScriptableActor\n");
+	printf("Better Change!\n");
 }
 
 void ScriptableActor::MyCustomMethod()
 {
-	// Do fancy stuff here
+	printf("Hello from custom method");
 }
 
 const char* ScriptableActor::GetName()

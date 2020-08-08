@@ -17,7 +17,7 @@
     </ClInclude>
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\Application\Actor_Base.h" />
-    <ClInclude Include="Source\Framework\Script_Symbol_Refs.h" />
+    <ClInclude Include="Source\Framework\Script_Symbol_FnPtrs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entry_Point.cpp" />

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Framework/Script_Symbol_Refs.h"
+#include "Framework/Script_Symbol_FnPtrs.h"
 
 namespace Framework {
 
@@ -11,23 +11,25 @@ namespace Framework {
 	{
 	public:
 		CPPScript(ScriptEngine* pScriptEngine);
+		~CPPScript() {}
 
 		bool Init();
 		void Run();
 		void Destroy();
 
+		inline void SetModuleName(const char* Name) { m_ModuleName = Name; }
+		inline const char* GetModuleName() { return m_ModuleName; }
 		inline void SetLibraryHandle(void* pHandle) { m_pLibraryHandle = pHandle; }
 		void* GetLibraryHandle() const { return m_pLibraryHandle; }
 
 	private:
 		ScriptEngine* m_pScriptEngine = nullptr;
-		OutActorInVoidMethod_t m_ActorFactory;
+		const char* m_ModuleName = nullptr;
 
 		void* m_pLibraryHandle = nullptr;
 		ActorBase* m_pAliasActor = nullptr;
-
-		OutVoidInVoidMethod_t m_CustomVoidMethod;
-
+		OutActorInVoidMethod_t m_ActorFactory;
+		
 	};
 
 }

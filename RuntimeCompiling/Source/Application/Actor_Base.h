@@ -16,7 +16,7 @@ class ActorBase
 public:
 	ActorBase(const char* Name)
 	: m_Name(Name) {}
-	virtual ~ActorBase() {}
+	~ActorBase() {}
 
 	virtual void OnStart() = 0;
 	virtual void OnUpdate(float DeltaMs) = 0;

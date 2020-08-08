@@ -3,6 +3,7 @@
 #include "Script_Engine.h"
 
 #include "CPP_Script.h"
+#include "Application/Actor_Base.h"
 
 #include "dlfcn.h"
 #include "dlfcn.c"
@@ -41,44 +42,77 @@ namespace Framework {
 
 		char DllOutputLocation[128];
 		sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/%s-Assembly.dll", Filename);
+
 		// Open the library so we can use it to make method associations in the CPPScript's
 		void* pHandle = dlopen(DllOutputLocation, RTLD_LAZY);
 		if (!pHandle) GetLastDlfcnError();
 
 		pScript->SetLibraryHandle(pHandle);
+		pScript->SetModuleName(Filename);
 		pScript->Init();
 
 		m_Scripts.push_back(pScript);
 	}
 
-	static void CheckAppQuit()
+	void ScriptEngine::Recompile()
 	{
-		printf("Press \"%c\" to close and \"%c\" to recompile.", 'q', 'c');
-		char Option;
-		std::cin >> Option;
+		m_Recompiling = true;
 
-		if (Option == 'q') {
-			ScriptEngine::Get().CloseApp();
-		}
-		else if (Option == 'c') {
-			// TODO Recompile
+		m_Scripts[0]->Destroy();
+		delete m_Scripts[0];
+		m_Scripts.clear();
+		LoadCPPFromFile("Scriptable_Actor");
+
+		//size_t NumScripts = m_Scripts.size();
+		//for (uint32_t i = 0; i < NumScripts; ++i) {
+
+		//	const char* ModuleName = m_Scripts[i]->GetModuleName();
+		//	m_Scripts[i]->Destroy();
+		//	delete m_Scripts[i];
+		//	//m_Scripts.clear();
+		//	LoadCPPFromFile(ModuleName);
+		//}
+
+		m_Recompiling = false;
+	}
+
+	static void GetUserInput()
+	{
+		while (true) {
+
+			printf("Press \"%c\" to close and \"%c\" to recompile.\n", 'q', 'c');
+			char Option;
+			std::cin >> Option;
+
+			if (Option == 'q') {
+				ScriptEngine::Get().CloseApp();
+				break;
+			}
+			else if (Option == 'c') {
+				ScriptEngine::Get().Recompile();
+			}
 		}
 	}
 
 	void ScriptEngine::RunScripts()
 	{
 		using namespace std::literals::chrono_literals;
-		std::thread CheckAppQuitThread(CheckAppQuit);
+		std::thread CheckAppQuitThread(GetUserInput);
 
 		// Simple game loop simulation
 		while (m_Running) {
 
-			for (auto& Script : m_Scripts) {
-
-				Script->Run();
+			if (m_Recompiling) {
+				continue;
 			}
-			
-			std::this_thread::sleep_for(1s);
+
+			for (auto& pScript : m_Scripts) {
+
+				printf("Module-%s: ", pScript->GetModuleName());
+				pScript->Run();
+			}
+
+			std::this_thread::sleep_for(2s);
 		}
 
 		CheckAppQuitThread.join();
@@ -89,6 +123,7 @@ namespace Framework {
 		for (auto& Script : m_Scripts) {
 			Script->Destroy();
 		}
+		m_Scripts.clear();
 	}
 
 	void* ScriptEngine::GetMethodHandleFromDllByString(void* pLibraryhandle, const char* MethodSymbolName)

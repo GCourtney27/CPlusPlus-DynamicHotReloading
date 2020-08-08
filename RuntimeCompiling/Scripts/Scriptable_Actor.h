@@ -5,12 +5,12 @@ class ScriptableActor : public ActorBase
 {
 public:
 	ScriptableActor();
-	virtual ~ScriptableActor();
+	~ScriptableActor();
 
-	virtual void OnStart() override;
-	virtual void OnUpdate(float DeltaMs) override;
+	void OnStart() override;
+	void OnUpdate(float DeltaMs) override;
 
-	virtual const char* GetName() override;
+	const char* GetName() override;
 
 	void MyCustomMethod();
 

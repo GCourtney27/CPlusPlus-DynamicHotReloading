@@ -13,11 +13,9 @@ namespace Framework {
 
 	bool CPPScript::Init()
 	{
-		// Adding a custom method
-		m_CustomVoidMethod = (OutVoidInVoidMethod_t)m_pScriptEngine->GetMethodHandleFromDllByString(m_pLibraryHandle, "MyCustomMethod");
-		
 		// Get a reference to the object from the dll
 		m_ActorFactory = (OutActorInVoidMethod_t)m_pScriptEngine->GetMethodHandleFromDllByString(m_pLibraryHandle, "Factory");
+		// To call functions from the class you must have an alias class. We do that here.
 		m_pAliasActor = m_ActorFactory();
 
 		return true;
