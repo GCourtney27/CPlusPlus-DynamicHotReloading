@@ -7,5 +7,6 @@ Visual Studio 2017/19 <br />
 
 # Getting Started
 1. Clone the repo
-2. Run the app and change `FileEntity.cpp`
-3. Press '1' to recompile and view your changes
+2. Install the MinGW compiler in the default location
+3. Run the app and change `Scriptable_Actor.cpp`
+4. Press 'c' to recompile and view your changes or 'q' to quit

@@ -20,8 +20,8 @@ void ScriptableActor::OnStart()
 
 void ScriptableActor::OnUpdate(float DeltaMs)
 {
-	//printf("Updating method from ScriptableActor\n");
-	printf("Better Change!\n");
+	printf("Updating method from ScriptableActor\n");
+	//printf("Better Change!\n");
 }
 
 void ScriptableActor::MyCustomMethod()
