@@ -20,7 +20,7 @@ void ScriptableActor::OnStart()
 
 void ScriptableActor::OnUpdate(float DeltaMs)
 {
-	printf("Updating method from ScriptableActor\n");
+	printf("Updating method from ScriptableActor. DetaTime: %f\n", DeltaMs);
 	//printf("Better Change!\n");
 }
 
@@ -34,7 +34,13 @@ const char* ScriptableActor::GetName()
 	return "ScriptableActor";
 }
 
-extern "C" __declspec(dllexport) ScriptableActor* Factory()
+ScriptableActor* ScriptableActor::Factory()
+{
+	return new ScriptableActor;
+}
+
+// Uncomment this method for compilation with MinGW.
+extern "C" ScriptableActor* Factory()
 {
 	return new ScriptableActor;
 }

@@ -14,6 +14,9 @@ public:
 
 	void MyCustomMethod();
 
+	ScriptableActor* Factory();
+
+
 private:
 	int m_Var1;
 	float m_Var2;

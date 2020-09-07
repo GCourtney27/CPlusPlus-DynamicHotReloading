@@ -40,13 +40,11 @@ namespace Framework {
 		// NOTE: It doesnt matter how you compile the dll, it could come from a visual studio project
 		//		 it just needs to be loaded by the 'dlopen' command below
 		//		 here we are just using MinGW as a compiler for the dll for convenience.
-		//::system(ConsoleCommad.c_str());
+		::system(ConsoleCommad.c_str());
 		CPPScript* pScript = new CPPScript(this);
 
 		char DllOutputLocation[128];
-		//::sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/%s-Assembly.dll", Filename);
-		//::sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/msvc.dll");
-		::sprintf_s(DllOutputLocation, "msvc.dll");
+		::sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/%s-Assembly.dll", Filename);
 
 		// Open the library so we can use it to make method associations in the CPPScript's
 		void* pHandle = ::dlopen(DllOutputLocation, RTLD_LAZY);

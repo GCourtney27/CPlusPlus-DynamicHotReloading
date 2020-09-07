@@ -2,10 +2,14 @@
 -- Tokens https://github.com/premake/premake-core/wiki/Tokens
 
 workspace ("RuntimeCompiling")
-	--architecture ("x86")
-	architecture ("x86_64")
 	
-	configurations { "Debug", "Release" }
+	configurations { "Debug32", "Release32", "Debug64", "Release64" }
+
+   filter "configurations:*32"
+      architecture "x86"
+
+   filter "configurations:*64"
+      architecture "x86_64"
 
    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 

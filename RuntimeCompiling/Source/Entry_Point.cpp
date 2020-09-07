@@ -7,32 +7,55 @@
 #include <strsafe.h>
 #include <cassert>
 
+/*
+	For debugging it is recomended you use dependency walker to view the symbols of the compiled dll.
+*/
+
 void TestDlfcn();
-void TestManualLoad();
+void ManualLoad();
 LPCTSTR GetLastWindowsError();
+
+#define USE_MSVC 0
 
 int main()
 {
-	TestManualLoad();
-	//TestDlfcn();
+#if defined _MSC_VER && USE_MSVC
+	ManualLoad();
+#else
+	TestDlfcn(); // NOTE: Platform must be set to Win32 for this to work.
+#endif
 
 	return 0;
 }
 
-void TestManualLoad()
+void ManualLoad()
 {
+	// Load the dll.
 	HMODULE hModule;
-	
 	hModule = LoadLibraryEx(L"msvc.dll", NULL, NULL);
+	OutActorInVoidMethod_t ScriptableActorFactry;
+	// Assemble the symbol that will be looked-up in the dll.
+	char SymbolBuffer[128];
+	const char* ActorClassName = "ScriptableActor";
+	sprintf_s(SymbolBuffer, "?Factory@%s@@QEAAPEAV1@XZ", ActorClassName);
+
 	if (hModule != NULL)
 	{
-		//OutVoidInVoidMethod_t FactoryMethod = (OutVoidInVoidMethod_t)GetProcAddress(hModule, "?PrintMethod@@YAXXZ"); // Symbols are decorated
-		OutActorInVoidMethod_t FactoryMethod = (OutActorInVoidMethod_t)GetProcAddress(hModule, "Factory"); // Symbols are decorated
-		LPCTSTR Error = GetLastWindowsError();
-		//FactoryMethod();
-		ActorBase* pActor = FactoryMethod();
+		// Create the alias actor so we can call the underlying methods.
+		ScriptableActorFactry = (OutActorInVoidMethod_t)GetProcAddress(hModule, SymbolBuffer); // Symbols are decorated
+		ActorBase* pActor = ScriptableActorFactry();
+		// Call a generic method;
 		pActor->OnStart();
+		// Call a method with parameter. 
+		float DeltaTime = 0.25f;
+		pActor->OnUpdate(DeltaTime);
+		// Get a value from the class.
+		const char* Name = pActor->GetName();
+		printf("Actor name: %s", Name);
+
+		LPCTSTR Error = GetLastWindowsError();
 		
+		// Free the resources.
 		FreeLibrary(hModule);
 		delete pActor;
 	}
