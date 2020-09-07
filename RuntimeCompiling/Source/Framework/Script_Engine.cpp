@@ -37,14 +37,19 @@ namespace Framework {
 
 		// When submitting commands through system() it will look for files
 		// relative to the .vcxproj while in visual studio
-		system(ConsoleCommad.c_str());
+		// NOTE: It doesnt matter how you compile the dll, it could come from a visual studio project
+		//		 it just needs to be loaded by the 'dlopen' command below
+		//		 here we are just using MinGW as a compiler for the dll for convenience.
+		//::system(ConsoleCommad.c_str());
 		CPPScript* pScript = new CPPScript(this);
 
 		char DllOutputLocation[128];
-		sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/%s-Assembly.dll", Filename);
+		//::sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/%s-Assembly.dll", Filename);
+		//::sprintf_s(DllOutputLocation, "Scripts/CompiledBinaries/msvc.dll");
+		::sprintf_s(DllOutputLocation, "msvc.dll");
 
 		// Open the library so we can use it to make method associations in the CPPScript's
-		void* pHandle = dlopen(DllOutputLocation, RTLD_LAZY);
+		void* pHandle = ::dlopen(DllOutputLocation, RTLD_LAZY);
 		if (!pHandle) GetLastDlfcnError();
 
 		pScript->SetLibraryHandle(pHandle);
@@ -144,13 +149,12 @@ namespace Framework {
 
 	void ScriptEngine::GetLastDlfcnError()
 	{
-		char* ErrorMessage = dlerror();
+		char* ErrorMessage = ::dlerror();
 		std::stringstream ss;
 		ss << "dlfcn load error: " << ErrorMessage;
 		std::cout << ss.str() << "\n";
-
-		//throw std::runtime_error(ss.str());
-
+		
+		throw std::runtime_error(ss.str());
 	}
 
 }

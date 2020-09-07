@@ -16,7 +16,7 @@ class ActorBase;
 // ---------------------
 
  // void Method(void)
-typedef void(*OutVoidInVoidMethod_t)();
+typedef void(*OutVoidInVoidMethod_t)(void);
 // void Method(float)
 typedef void(*OutVoidInFloatMethod_t)(float);
 

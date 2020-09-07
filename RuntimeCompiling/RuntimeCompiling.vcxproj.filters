@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{D9DE78AF-4594-F1A4-CE88-EB7B3A3DE8A8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{1362EE31-7FCC-A2A8-C80A-544E34B480FD}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Application\Actor_Base.h">
+      <Filter>Application</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Framework\CPP_Script.h">
       <Filter>Framework</Filter>
     </ClInclude>
@@ -15,16 +21,19 @@
     <ClInclude Include="Source\Framework\Script_Engine.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Framework\Script_Symbol_FnPtrs.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
     <ClInclude Include="Source\stdafx.h" />
-    <ClInclude Include="Source\Application\Actor_Base.h" />
-    <ClInclude Include="Source\Framework\Script_Symbol_FnPtrs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entry_Point.cpp" />
+    <ClCompile Include="Source\Framework\CPP_Script.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Framework\Script_Engine.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Source\stdafx.cpp" />
-    <ClCompile Include="Source\Framework\CPP_Script.cpp" />
   </ItemGroup>
 </Project>

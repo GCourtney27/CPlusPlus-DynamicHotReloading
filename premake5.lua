@@ -2,15 +2,12 @@
 -- Tokens https://github.com/premake/premake-core/wiki/Tokens
 
 workspace ("RuntimeCompiling")
-	architecture ("x86")
+	--architecture ("x86")
+	architecture ("x86_64")
+	
+	configurations { "Debug", "Release" }
 
-	configurations
-	{
-		"Debug",
-		"Release"
-	}
-
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+   outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["dlfcn"] = "RuntimeCompiling/Vendor/dlfcn"
@@ -57,3 +54,24 @@ project ("RuntimeCompiling")
 		{
 			"MultiProcessorCompile"
 		}
+
+	-- Samples
+	project ("msvc")
+		location ("Samples")
+		kind "SharedLib"
+		language "C++"
+		cppdialect "C++17"
+
+		targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
+		objdir ("Bin-Int/" .. outputdir .. "/%{prj.name}")
+		
+		files
+		{
+			"Samples/Source/**.cpp",
+			"Samples/Source/**.h",
+		}
+		
+	postbuildcommands
+	{
+		("{COPY} %{wks.location}Bin/".. outputdir .. "/%{prj.name}/%{prj.name}.dll ../RuntimeCompiling/")
+	}

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CPP_Script.h"
 
 #include "Framework/Script_Engine.h"
